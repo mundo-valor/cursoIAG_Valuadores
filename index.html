@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso Online: Inteligencia Artificial Generativa para Valuadores | EVMC</title>
+  <meta name="description" content="Curso especializado en Inteligencia Artificial Generativa aplicada a la valuación inmobiliaria e industrial por el Prof. Ing. Miguel Camacaro Pérez, M.Sc.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #070c18;
+      --bg-card: #0f172a;
+      --border-card: rgba(255, 255, 255, 0.12);
+      --royal-blue: #0070ba;
+      --accent-red: #991b1b;
+      --accent-red-hover: #b91c1c;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-title: 'Cinzel', serif;
+      --font-reading: 'Literata', Georgia, serif;
+      --font-ui: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      /* Fondo atenuado con la imagen solicitada (95% opacidad para máxima discreción) */
+      background-image: linear-gradient(rgba(7, 12, 24, 0.95), rgba(7, 12, 24, 0.97)), url('image_2360ec_2.png');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+      text-align: justify;
+    }
+
+    .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Top Navigation Bar */
+    header {
+      background: rgba(7, 12, 24, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 0.75rem 0;
+      text-align: left;
+    }
+
+    .nav-wrap { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
+    .brand-logo-left, .brand-logo-right { display: flex; align-items: center; text-decoration: none; }
+
+    .logo-container {
+      background: #ffffff;
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 2px solid var(--accent-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .logo-container img { height: 50px; width: auto; object-fit: contain; display: block; }
+
+    .nav-center { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; justify-content: center; }
+    .nav-center a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: color 0.2s; }
+    .nav-center a:hover { color: #fca5a5; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem;
+      border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer;
+      text-decoration: none; transition: all 0.2s ease; border: none; text-align: center;
+    }
+    .btn-red { background: linear-gradient(135deg, #7f1d1d, var(--accent-red)); color: #ffffff; box-shadow: 0 4px 15px rgba(153, 27, 27, 0.4); }
+    .btn-red:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(185, 28, 28, 0.6); background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover)); }
+    .btn-donate { background: linear-gradient(135deg, #1d4ed8, #2563eb); color: #ffffff; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); border: 1px solid rgba(255, 255, 255, 0.25); }
+    .btn-donate:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6); }
+
+    /* Hero / Presentación del Curso */
+    .hero {
+      padding: 5rem 0 4.5rem;
+      background: radial-gradient(circle at 50% 10%, rgba(23, 37, 84, 0.5) 0%, transparent 80%);
+      border-bottom: 1px solid var(--border-card);
+      text-align: left;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3.5rem; align-items: center; }
+    .badge-editorial {
+      display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(153, 27, 27, 0.15);
+      border: 1px solid rgba(153, 27, 27, 0.4); padding: 0.35rem 1rem; border-radius: 999px;
+      font-size: 0.8rem; font-weight: 700; color: #fca5a5; margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .hero-title { font-family: var(--font-title); font-size: clamp(2.2rem, 4.2vw, 3.4rem); line-height: 1.2; margin-bottom: 1.2rem; color: #ffffff; }
+    .hero-title span { color: #f87171; }
+    .hero-lead { font-family: var(--font-reading); font-size: 1.12rem; color: #cbd5e1; margin-bottom: 2rem; line-height: 1.8; text-align: justify; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero-banner-card {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px; padding: 1.5rem; text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 35px rgba(153, 27, 27, 0.25);
+    }
+    .hero-banner-card img { width: 100%; height: auto; border-radius: 14px; display: block; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+
+    /* Secciones Generales */
+    .section-block { padding: 4.5rem 0; border-bottom: 1px solid var(--border-card); text-align: left; }
+    .section-head { text-align: center; margin-bottom: 3rem; }
+    .section-head h2 { font-family: var(--font-title); font-size: 2.2rem; color: #fff; margin-bottom: 0.5rem; }
+
+    /* Grids & Cards */
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.8rem; }
+    .catalog-card {
+      background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 16px;
+      padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;
+      transition: all 0.25s ease; position: relative; overflow: hidden; text-align: left;
+    }
+    .catalog-card:hover { transform: translateY(-4px); border-color: var(--accent-red); box-shadow: 0 10px 25px -5px rgba(153, 27, 27, 0.25); }
+    .item-badge {
+      position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(153, 27, 27, 0.2);
+      color: #fca5a5; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 999px; border: 1px solid rgba(153, 27, 27, 0.4);
+    }
+    .catalog-card h3 { font-size: 1.15rem; color: #fff; margin-bottom: 0.8rem; line-height: 1.3; padding-right: 4rem; }
+    .catalog-card p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5; text-align: justify; }
+
+    .card-thumbnail {
+      width: 100%; height: 220px; background: #1e293b; border-radius: 10px; margin-bottom: 1.2rem;
+      display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; position: relative;
+    }
+    .card-thumbnail img { width: 100%; height: 100%; object-fit: cover; display: block; background: #0b1329; }
+    .card-footer { display: flex; align-items: center; justify-content: flex-end; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.2rem; }
+
+    /* Video Container */
+    .video-showcase-card {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; padding: 2.5rem; max-width: 900px; margin: 0 auto;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 35px rgba(153, 27, 27, 0.2); text-align: center;
+    }
+    .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+    /* Author Section */
+    .author-card-centered {
+      background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px; padding: 3rem 2.5rem; max-width: 850px; margin: 0 auto; text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 35px rgba(153, 27, 27, 0.15);
+    }
+    .author-photo-xl {
+      width: 200px; height: 200px; border-radius: 50%; border: 3px solid var(--accent-red);
+      padding: 5px; margin: 0 auto 1.5rem; overflow: hidden; background: #070c18; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .author-photo-xl img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+    .author-card-centered h3 { font-family: var(--font-title); font-size: 1.6rem; color: #fff; margin-bottom: 0.4rem; }
+    .author-card-centered .subtitle { color: #60a5fa; font-weight: 700; font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .author-quote { font-family: var(--font-reading); font-size: 1.05rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 2rem; font-style: italic; text-align: justify; }
+
+    /* Presentación Resumen Box */
+    .resumen-box {
+      background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px; padding: 3rem; max-width: 900px; margin: 0 auto; font-family: var(--font-reading); font-size: 1.05rem; color: #cbd5e1; line-height: 1.8; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+    .resumen-box h3 { font-family: var(--font-title); color: #fff; margin-bottom: 1.2rem; font-size: 1.5rem; text-align: center; }
+    .resumen-box p { margin-bottom: 1.2rem; text-align: justify; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border-card); padding: 3rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; background: rgba(7, 12, 24, 0.95); }
+
+    /* Modal PDF Viewer */
+    .viewer-modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(7, 12, 24, 0.92); backdrop-filter: blur(10px); z-index: 1000;
+      align-items: center; justify-content: center; padding: 2rem;
+    }
+    .viewer-content {
+      background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 20px;
+      width: 100%; max-width: 1000px; height: 85vh; display: flex; flex-direction: column;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.9); overflow: hidden;
+    }
+    .viewer-header { padding: 1rem 1.5rem; background: #1e293b; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-card); }
+    .viewer-title { font-family: var(--font-title); font-size: 1.1rem; color: #fff; }
+    .viewer-close { background: rgba(255,255,255,0.1); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .viewer-close:hover { background: var(--accent-red); }
+    .viewer-body { flex: 1; width: 100%; background: #0f172a; }
+    .viewer-body iframe { width: 100%; height: 100%; border: none; }
+
+    @media (max-width: 950px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-btns { justify-content: center; }
+      .nav-center { display: none; }
+      body { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="brand-logo-left" title="Miguel Camacaro Ediciones">
+        <div class="logo-container">
+          <img src="LogoMCE.png" alt="Miguel Camacaro Ediciones" onerror="this.style.display='none'">
+        </div>
+      </a>
+
+      <nav class="nav-center">
+        <a href="#presentacion">Presentación</a>
+        <a href="#autor">Autor</a>
+        <a href="#resumen">Resumen</a>
+        <a href="#programacion">Programación</a>
+        <a href="#video">Video del Curso</a>
+        <a href="#material">Material Base</a>
+        <a href="#formularios">Formularios</a>
+        <a href="#lecturas">Lecturas (20)</a>
+        <a href="https://paypal.me/spilimcurso" target="_blank" rel="noopener noreferrer" class="btn btn-donate">☕ Aportar / Donar</a>
+      </nav>
+
+      <a href="#" class="brand-logo-right" title="Mundo Valor">
+        <div class="logo-container">
+          <img src="Mundovalor.png" alt="Mundo Valor" onerror="this.style.display='none'">
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 1. PRESENTACIÓN DEL CURSO -->
+    <section class="hero" id="presentacion">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge-editorial">Escuela de Valuación Miguel Camacaro [EVMC]</span>
+          <h1 class="hero-title">Curso Online: <span>Inteligencia Artificial Generativa para Valuadores</span></h1>
+          <p class="hero-lead">
+            Domina las herramientas de última generación, modelos de lenguaje y automatización para revolucionar tus análisis de mercado, redacción de informes y tasaciones de bienes inmuebles y maquinaria.
+          </p>
+          <div class="hero-btns">
+            <a href="#video" class="btn btn-red">▶ Ver Video del Curso</a>
+            <a href="https://paypal.me/spilimcurso" target="_blank" rel="noopener noreferrer" class="btn btn-donate">☕ Aportar al Proyecto</a>
+          </div>
+        </div>
+
+        <div class="hero-banner-card">
+          <img src="image_1dcdf0.png" alt="Portada Curso Inteligencia Artificial Generativa para Valuadores" onerror="this.onerror=null; this.src='LOGO EVMC.jpg';">
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. AUTOR CON SU IMAGEN Y RESEÑA -->
+    <section class="section-block" id="autor">
+      <div class="container">
+        <div class="author-card-centered">
+          <div class="author-photo-xl">
+            <img src="Informal 3.png" alt="Prof. Ing. Miguel Camacaro Pérez, M.Sc." onerror="this.style.display='none'">
+          </div>
+          <h3>Prof. Ing. Miguel Camacaro Pérez, M.Sc.</h3>
+          <div class="subtitle">Ingeniero Civil - Tasador • Especialista en Ingeniería Legal y de Valuación</div>
+          <p class="author-quote">
+            «El profesor Miguel Camacaro Pérez es un apasionado de la Ciencia de la valuación, de la Ciencia de datos y de la Inteligencia Artificial Generativa. Con más de 40 años de experiencia profesional, se ha comprometido en impulsar el crecimiento y la modernización de los valuadores a través de la integración de tecnologías avanzadas en su práctica diaria».
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PRESENTACIÓN DEL CURSO (RESUMEN OFICIAL) - UBICADA ANTES DE LA PROGRAMACIÓN -->
+    <section class="section-block" id="resumen">
+      <div class="container">
+        <div class="section-head">
+          <h2>Presentación del Curso</h2>
+        </div>
+        <div class="resumen-box">
+          <h3>Introducción a la Innovación en el Sector Inmobiliario</h3>
+          <p>
+            «¡Bienvenidos a un viaje transformador al corazón de la innovación en el sector inmobiliario! Hoy nos adentraremos en el fascinante mundo de la Inteligencia Artificial Generativa (IAG) y descubriremos cómo esta tecnología no es solo el futuro, sino una herramienta indispensable en vuestro presente.»
+          </p>
+          <p>
+            El programa aborda desde la comprensión teórica de la IA y el Big Data hasta su aplicación práctica inmediata en las operaciones diarias de tasación. Dejamos atrás la teoría para sumergirnos en casos de uso concretos que optimizan la redacción de anuncios persuasivos, el análisis profundo de mercados y la visualización interactiva de datos.
+          </p>
+          <p>
+            Al finalizar, los participantes estarán equipados con habilidades prácticas para integrar la IAG en su flujo de trabajo profesional, liderando la vanguardia en el competitivo mercado inmobiliario actual.
+          </p>
+          <p style="text-align: right; margin-top: 1.5rem; font-family: var(--font-title); color: #60a5fa;">
+            — Prof. Miguel Camacaro Pérez, M.Sc.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PROGRAMACIÓN EN PDF CON SU IMAGEN -->
+    <section class="section-block" id="programacion">
+      <div class="container">
+        <div class="section-head">
+          <h2>Programación</h2>
+        </div>
+
+        <div style="max-width: 500px; margin: 0 auto;">
+          <div class="catalog-card">
+            <span class="item-badge">PDF Oficial</span>
+            <div class="card-thumbnail">
+              <img src="image_1dc74e.png" alt="Programación del curso online" onerror="this.onerror=null; this.src='LOGO EVMC.jpg';">
+            </div>
+            <h3>Programación del curso online "Inteligencia Artificial para Valuadores"</h3>
+            <p>Documento oficial con la estructura temática, cronograma y actividades de evaluación.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('Programación del curso online.pdf', 'Programación del curso online')" style="width:100%; justify-content:center;">📖 Leer Documento PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. VIDEO DEL CURSO CON SU IMAGEN -->
+    <section class="section-block" id="video">
+      <div class="container">
+        <div class="section-head">
+          <h2>Video del Curso</h2>
+        </div>
+
+        <div class="video-showcase-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/0hiChDy0Up8" title="Video del Curso: Inteligencia Artificial Generativa para Valuadores" allowfullscreen></iframe>
+          </div>
+          <h3 style="font-family: var(--font-title); color: #fff; margin-bottom: 0.5rem;">Inteligencia Artificial Generativa para Valuadores</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Sesión oficial explicativa sobre la aplicación práctica de LLMs y asistentes inteligentes en tasación.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. MATERIAL BASE: CINCO MÓDULOS EN PDF CON IMAGEN -->
+    <section class="section-block" id="material">
+      <div class="container">
+        <div class="section-head">
+          <h2>Material Base</h2>
+        </div>
+
+        <div class="catalog-grid">
+          <div class="catalog-card">
+            <span class="item-badge">Módulo 1</span>
+            <div class="card-thumbnail"><img src="image_1dbf0e.png" alt="Módulo 1 - Clase 1"></div>
+            <h3>1. Módulo 1 - Clase 1: Fundamentos de IA y Valuación</h3>
+            <p>Introducción conceptual, historia de la IA generativa y relevancia en el sector inmobiliario.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('1. Módulo 1 - Clase 1.pdf', 'Módulo 1 - Clase 1')" style="width:100%; justify-content:center;">📖 Leer PDF</button>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <span class="item-badge">Módulo 1</span>
+            <div class="card-thumbnail"><img src="image_1dbf0e.png" alt="Módulo 1 - Clase 2"></div>
+            <h3>2. Módulo 1 - Clase 2: Funcionamiento y Modelos</h3>
+            <p>Cómo la IAG genera texto, imágenes y análisis de resultados en distintos formatos.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('2. Módulo 1 - Clase 2.pdf', 'Módulo 1 - Clase 2')" style="width:100%; justify-content:center;">📖 Leer PDF</button>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <span class="item-badge">Módulo 2</span>
+            <div class="card-thumbnail"><img src="image_1dbf0e.png" alt="Módulo 2 - Clase 3"></div>
+            <h3>3. Módulo 2 - Clase 3: Prompt Engineering</h3>
+            <p>Creación de instrucciones efectivas y síntesis de informes con Grandes Modelos de Lenguaje.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('3. Módulo 2 - Clase 3.pdf', 'Módulo 2 - Clase 3')" style="width:100%; justify-content:center;">📖 Leer PDF</button>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <span class="item-badge">Módulo 2</span>
+            <div class="card-thumbnail"><img src="image_1dbf0e.png" alt="Módulo 2 - Clase 4"></div>
+            <h3>4. Módulo 2 - Clase 4: Análisis de Datos Inmobiliarios</h3>
+            <p>Identificación de tendencias, visualización de datos y análisis de datasets con IA.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('4. Módulo 2 - Clase 4.pdf', 'Módulo 2 - Clase 4')" style="width:100%; justify-content:center;">📖 Leer PDF</button>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <span class="item-badge">Módulo 2</span>
+            <div class="card-thumbnail"><img src="image_1dbf0e.png" alt="Módulo 2 - Clase 5"></div>
+            <h3>5. Módulo 2 - Clase 5: Google AI Studio & NotebookLM</h3>
+            <p>Plataformas avanzadas para organizar y analizar grandes volúmenes de información documental.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('5. Módulo 2 - Clase 5.pdf', 'Módulo 2 - Clase 5')" style="width:100%; justify-content:center;">📖 Leer PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FORMULARIOS Y ASIGNACIONES: CINCO EN PDF CON SUS IMÁGENES -->
+    <section class="section-block" id="formularios">
+      <div class="container">
+        <div class="section-head">
+          <h2>Formularios & Asignaciones</h2>
+        </div>
+
+        <div class="catalog-grid">
+          <div class="catalog-card">
+            <span class="item-badge">Evaluación</span>
+            <div class="card-thumbnail"><img src="image_1dbf4b.png" alt="Formulario Nº 1"></div>
+            <h3>Formulario Nº 1 & Asignación</h3>
+            <p>Cuestionario de validación y ejercicios prácticos del Módulo 1 (Fundamentos y relevancia).</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('Formulario Nº 1.pdf', 'Formulario Nº 1')" style="width:100%; justify-content:center;">📖 Leer Formulario</button>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <span class="item-badge">Evaluación</span>
+            <div class="card-thumbnail"><img src="image_1dbf4b.png" alt="Formulario Nº 2"></div>
+            <h3>Formulario Nº 2 & Asignación</h3>
+            <p>Evaluación de conceptos de Inteligencia Artificial Generativa y generación de contenidos.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('Formulario Nº 2.pdf', 'Formulario Nº 2')" style="width:100%; justify-content:center;">📖 Leer Formulario</button>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <span class="item-badge">Evaluación</span>
+            <div class="card-thumbnail"><img src="image_1dbf4b.png" alt="Formulario Nº 3"></div>
+            <h3>Formulario Nº 3 & Asignación</h3>
+            <p>Práctica de Prompt Engineering y síntesis de estudios de mercado con GPT.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('Formulario Nº 3.pdf', 'Formulario Nº 3')" style="width:100%; justify-content:center;">📖 Leer Formulario</button>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <span class="item-badge">Evaluación</span>
+            <div class="card-thumbnail"><img src="image_1dbf4b.png" alt="Formulario Nº 4"></div>
+            <h3>Formulario Nº 4 & Asignación</h3>
+            <p>Análisis de datasets inmobiliarios y elaboración de informes visuales interactivos.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('Formulario Nº 4.pdf', 'Formulario Nº 4')" style="width:100%; justify-content:center;">📖 Leer Formulario</button>
+            </div>
+          </div>
+
+          <div class="catalog-card">
+            <span class="item-badge">Evaluación</span>
+            <div class="card-thumbnail"><img src="image_1dbf4b.png" alt="Formulario Nº 5"></div>
+            <h3>Formulario Nº 5 & Asignación</h3>
+            <p>Evaluación final sobre el uso de Google AI Studio y NotebookLM aplicados a tasaciones.</p>
+            <div class="card-footer" style="width:100%;">
+              <button class="btn btn-red" onclick="openViewer('Formulario Nº 5.pdf', 'Formulario Nº 5')" style="width:100%; justify-content:center;">📖 Leer Formulario</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. LECTURAS: 20 PDF CON IMÁGENES -->
+    <section class="section-block" id="lecturas">
+      <div class="container">
+        <div class="section-head">
+          <h2>Lecturas Complementarias</h2>
+        </div>
+
+        <div class="catalog-grid" id="lecturasGrid">
+          <!-- Generado dinámicamente mediante JavaScript -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p><strong>Escuela de Valuación Miguel Camacaro [EVMC]</strong> — © 2026 Miguel Camacaro Ediciones & Mundo Valor</p>
+      <p style="margin-top:0.4rem; opacity:0.7;">Curso Online: Inteligencia Artificial Generativa para Valuadores.</p>
+    </div>
+  </footer>
+
+  <!-- PDF Viewer Modal -->
+  <div class="viewer-modal" id="pdfModal">
+    <div class="viewer-content">
+      <div class="viewer-header">
+        <div class="viewer-title" id="modalTitle">Visor de Documento PDF</div>
+        <button class="viewer-close" onclick="closeViewer()">✕</button>
+      </div>
+      <div class="viewer-body">
+        <iframe id="pdfFrame" src="" title="Visor de PDF"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const lecturasData = [
+      { id: 1, title: "1. Material Base", file: "1. Material Base.pdf" },
+      { id: 2, title: "2. Valuación 3.0", file: "2. Valuación 3.0.pdf" },
+      { id: 3, title: "3. Certificación del Valor Inmobiliario", file: "3. Certificación del Valor Inmobiliario.pdf" },
+      { id: 4, title: "4. Herramientas de IAG", file: "4. Herramientas de IAG.pdf" },
+      { id: 5, title: "5. De la informática para Valuadores", file: "5. De la informática para Valuadores.pdf" },
+      { id: 6, title: "6. De la Inteligencia Artificial", file: "6. De la Inteligencia Artificial.pdf" },
+      { id: 7, title: "7. El poder del prompt", file: "7. El poder del prompt.pdf" },
+      { id: 8, title: "8. AI Valuation Podcast", file: "8. AI Valuation Podcast.pdf" },
+      { id: 9, title: "9. Casos de uso de IAG", file: "9. Casos de uso de IAG.pdf" },
+      { id: 10, title: "10. IAG y el prompt engineering", file: "10. IAG y el prompt engineering.pdf" },
+      { id: 11, title: "11. IAG sin misterios", file: "11. IAG sin misterios.pdf" },
+      { id: 12, title: "12. Modelos LLM", file: "12. Modelos LLM.pdf" },
+      { id: 13, title: "13. El Valuador Inteligente", file: "13. El Valuador Inteligente.pdf" },
+      { id: 14, title: "14. La transformación del mercado inmobiliario", file: "14. La transformación del mercado inmobiliario.pdf" },
+      { id: 15, title: "15. La nueva era de la valuación", file: "15. La nueva era de la valuación.pdf" },
+      { id: 16, title: "16. Informe Estratégico", file: "16. Informe Estratégico.pdf" },
+      { id: 17, title: "17. Prompt engineering", file: "17. Prompt engineering.pdf" },
+      { id: 18, title: "18. Curso online IAG - Métodos y enfoques", file: "18. Curso online IAG - Métodos y enfoques.pdf" },
+      { id: 19, title: "19. Enfoque del Costo", file: "19. Enfoque del Costo.pdf" },
+      { id: 20, title: "20. Análisis de datos", file: "20. Análisis de datos.pdf" }
+    ];
+
+    function renderLecturas() {
+      const grid = document.getElementById('lecturasGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      lecturasData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'catalog-card';
+        card.innerHTML = `
+          <span class="item-badge">Lectura ${item.id}</span>
+          <div class="card-thumbnail">
+            <img src="image_1dbfa6.png" alt="${item.title}" onerror="this.onerror=null; this.src='LOGO EVMC.jpg';">
+          </div>
+          <h3>${item.title}</h3>
+          <p>Documento de lectura complementaria nº ${item.id} para el dominio de la Inteligencia Artificial Aplicada.</p>
+          <div class="card-footer" style="width:100%;">
+            <button class="btn btn-red" onclick="openViewer('${item.file}', '${item.title}')" style="width:100%; justify-content:center;">📖 Leer Lectura PDF</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function openViewer(pdfFile, title) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('pdfFrame').src = pdfFile;
+      document.getElementById('pdfModal').style.display = 'flex';
+    }
+
+    function closeViewer() {
+      document.getElementById('pdfModal').style.display = 'none';
+      document.getElementById('pdfFrame').src = '';
+    }
+
+    window.onload = () => {
+      renderLecturas();
+    };
+  </script>
+</body>
+</html>
